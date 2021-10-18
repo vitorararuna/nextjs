@@ -1,44 +1,47 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 function Users({ users }) {
-    // const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-    // const fetchUsers = async () => {
-    //   const response = await axios.get(
-    //     'https://jsonplaceholder.typicode.com/users'
-    //   );
-    //   const data = await response.data;
+  // const fetchUsers = async () => {
+  //   const response = await axios.get(
+  //     'https://jsonplaceholder.typicode.com/users'
+  //   );
+  //   const data = await response.data;
 
-    //   setUsers(data);
-    // };
+  //   setUsers(data);
+  // };
 
-    // console.log(users);
+  // console.log(users);
 
-    // useEffect(() => {
-    //   fetchUsers();
-    // }, []);
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
 
-    return (
+  return (
+    <div>
+      {users.map((user) => (
         <div>
-            {users.map((user) => (
-                <div key={user.namerr}>
-                    {user.name}
-                </div>
-            ))}
+          <Link href='/profile/[id]' as={`/profile/${user.id}`}>
+            <a>{user.name}</a>
+          </Link>
         </div>
-    );
+      ))}
+    </div>
+  );
 }
 
-export async function getServerSideProps(context) {
-    const response = await axios.get(
-        'https://jsonplaceholder.typicode.com/users'
-    );
-    const data = await response.data;
+export async function getStaticProps(context) {
+  const response = await axios.get(
+    'https://jsonplaceholder.typicode.com/users'
+  );
+  const data = await response.data;
 
-    return {
-        props: { users: data }, ///passando para props do meu componente
-    };
+  return {
+    props: { users: data }, 
+  };
 }
 
 export default Users;
