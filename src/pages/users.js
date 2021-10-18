@@ -30,7 +30,7 @@ function Users({ users }) {
     );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const response = await axios.get(
         'https://jsonplaceholder.typicode.com/users'
     );
