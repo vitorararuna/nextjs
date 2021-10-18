@@ -26,6 +26,10 @@ export async function getStaticProps(context) {
   return {
     props: { user, revalidate: 10 }, // passasndo como props do meu componente 
   };
+
+  //OBS: Esse meu REVALIDATE de 10segundos significa que vou regenerar a minha página de 10 em 10 segundos
+  //Caso a api altere algum nome de usuário, ela só sera afetava aqui graças ao revalidate! 
+  //Esse é o conceito de ISG (incremental static regeneration)
 }
 
 export async function getStaticPaths() {
